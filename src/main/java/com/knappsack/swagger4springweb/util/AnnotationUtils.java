@@ -115,11 +115,15 @@ public class AnnotationUtils {
                 parameters.add(new Parameter(apiImplicitParam.name(), Option.apply(apiImplicitParam.value()),
                         Option.apply(apiImplicitParam.defaultValue()),
                         apiImplicitParam.required(), apiImplicitParam.allowMultiple(),
-                        apiImplicitParam.dataType().toLowerCase(), getAllowableValues(apiImplicitParam),
+                        getDataType(apiImplicitParam.dataType()), getAllowableValues(apiImplicitParam),
                         apiImplicitParam.paramType(), Option.apply(apiImplicitParam.access())));
             }
         }
         return parameters;
+    }
+
+    private static String getDataType(String dataType) {
+        return dataType == null ? null : dataType.toLowerCase();
     }
 
     private static AllowableValues getAllowableValues(ApiImplicitParam apiImplicitParam) {
